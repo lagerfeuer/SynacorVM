@@ -11,8 +11,13 @@ $(BIN): $(OBJS)
 	$(CC) -fuse-ld=lld -o $@ $^
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -o $@ $<
+	$(CC) $(CFLAGS) $(DEBUG) -o $@ $<
+
+debug: DEBUG = -DDEBUG
+debug: all
 
 clean:
 	rm $(OBJS)
 	rm $(BIN)
+
+.PHONY: debug clean

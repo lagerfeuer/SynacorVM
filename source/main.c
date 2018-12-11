@@ -8,6 +8,10 @@
 #define CONTINUE 1
 #define MOD_VAL 32768
 
+#ifdef DEBUG
+FILE* logfile;
+#endif
+
 typedef unsigned char Byte;
 typedef unsigned short Word;
 
@@ -60,6 +64,9 @@ FAIL_READ:
 Word fetch(CPU* cpu) { return cpu->memory[cpu->pc++]; };
 
 unsigned int execute(CPU* cpu, Word opcode) {
+#ifdef DEBUG
+  fprintf(logfile, "[*] Executing: %hu (PC: %u)\n", opcode, cpu->pc - 1);
+#endif
   Word a, b, c;
   switch (opcode) {
   case 0: // HALT
@@ -197,9 +204,20 @@ int main(int argc, char* argv[]) {
     return EXIT_FAILURE;
   }
 
+#ifdef DEBUG
+  logfile = fopen("synacorVM.log", "w+");
+  if (logfile == NULL) {
+    fprintf(stderr, "Could not open logfile (synacorVM.log)\n");
+    abort();
+  }
+#endif
+
   while (execute(cpu, fetch(cpu)))
     ;
 
   free(cpu);
+#ifdef DEBUG
+  fclose(logfile);
+#endif
   return EXIT_SUCCESS;
 }
