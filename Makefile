@@ -16,8 +16,11 @@ $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 debug: DEBUG = -DDEBUG
 debug: all
 
+run: debug
+	./$(BIN) challenge.bin
+
 clean:
 	rm $(OBJS)
 	rm $(BIN)
 
-.PHONY: debug clean
+.PHONY: debug run clean

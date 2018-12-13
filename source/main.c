@@ -86,7 +86,7 @@ unsigned int execute(CPU* cpu, Word opcode) {
       abort();
     }
     a = fetch(cpu);
-    cpu->memory[resolve(a)] = cpu->stack[--cpu->sp];
+    cpu->memory[a] = cpu->stack[--cpu->sp];
     break;
   case 4: // EQ
     a = fetch(cpu);
@@ -149,12 +149,12 @@ unsigned int execute(CPU* cpu, Word opcode) {
   case 14: // NOT
     a = fetch(cpu);
     b = fetch(cpu);
-    cpu->memory[a] = ~resolve(b) % MOD_VAL;
+    cpu->memory[a] = (~resolve(b)) & 0x7FFF;
     break;
   case 15: // READ
     a = fetch(cpu);
     b = fetch(cpu);
-    cpu->memory[a] = resolve(b);
+    cpu->memory[a] = cpu->memory[resolve(b)];
     break;
   case 16: // WRITE
     a = fetch(cpu);
