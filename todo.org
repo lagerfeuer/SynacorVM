@@ -1,0 +1,4 @@
+* fully test challenge.bin
+
+* Disassembler
+
