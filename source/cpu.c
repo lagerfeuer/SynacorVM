@@ -1,8 +1,12 @@
 #include "cpu.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+extern FILE* logfile;
 
 int load(CPU* cpu, char* file_name) {
+  memset(cpu->memory, 0, MEMORY_SIZE);
   FILE* binary = fopen(file_name, "rb");
   if (binary == NULL)
     return EXIT_FAILURE;
@@ -15,6 +19,7 @@ int load(CPU* cpu, char* file_name) {
   if (MEMORY_SIZE * 2 + 1 < ((unsigned long)file_size))
     goto FAIL_READ;
   rewind(binary);
+  cpu->size = file_size / 2;
 
   int i = 0;
   int byte;

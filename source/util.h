@@ -11,11 +11,4 @@
 typedef unsigned char Byte;
 typedef unsigned short Word;
 
-typedef struct _CPU_ {
-  Word memory[MEMORY_SIZE];
-  Word stack[STACK_SIZE];
-  unsigned int pc;
-  unsigned int sp;
-} CPU;
-
 #endif /* SYNACOR_UTIL_H */
