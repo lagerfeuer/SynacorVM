@@ -1,3 +1,9 @@
+# Project
+vm
+*.log
+*.tgz
+*.tar.gz
+
 # Prerequisites
 *.d
 

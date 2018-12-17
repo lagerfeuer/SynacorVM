@@ -1,0 +1,4 @@
+* fully test challenge.bin
+
+* Disassembler
+** Figure out how to spot all 'Data' fields correctly (some get parsed as opcodes)
